@@ -1,0 +1,2 @@
+class HolyDaysController < ApplicationController
+end
