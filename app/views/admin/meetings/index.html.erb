@@ -1,0 +1,17 @@
+<div>
+  <h1>Meeting partie admin</h1>
+  <%= link_to 'Ajouter une réunion ultérieure', new_admin_meeting_path %>
+  
+  <% if @meetings.present? %>
+    <% @meetings.each do |meet| %>
+      <div>
+        <p>Created by admin: <%= meet.admin.email %></p>
+        <p><%= meet.description %></p>
+        <p>Start time: <%= meet.start_time %></p> 
+        <p>End time: <%= meet.end_time %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Aucune réunion prévue</p>
+  <% end %>
+</div>

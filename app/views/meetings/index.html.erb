@@ -1,12 +1,15 @@
 <h1>Meetings</h1>
 
-<% if @meetings.any? %>
+<% if @meetings.present? %>
   <ul>
     <% @meetings.each do |meeting| %>
       <li>
         <%= meeting.title %> - 
         <%= meeting.start_time.strftime("%B %d, %Y %I:%M %p") %>
       </li>
+      <h4>Description</h4>
+       <p>Created by admin with id: <%= meeting.admin.email%></p>
+      <p><%= meeting.description %></p>
     <% end %>
   </ul>
 <% else %>

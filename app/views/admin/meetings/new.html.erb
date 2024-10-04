@@ -1,5 +1,6 @@
 <h1>Create New Meeting</h1>
-<%= form_with(model: [:admin, @meeting], local: true) do |f| %>
+<%= form_with model: @meeting, url: admin_meetings_path, data: { turbo: false } do |f| %>
+
   <%= f.label :title %>
   <%= f.text_field :title %>
 

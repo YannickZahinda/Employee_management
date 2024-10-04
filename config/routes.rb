@@ -17,7 +17,7 @@ Rails.application.routes.draw do
         patch :reject
       end
     end
-    resources :meetings, only: [:new, :create]
+    resources :meetings, only: [:new, :index, :create]
     resources :attendances, only: [:new, :create]
   end
 end
