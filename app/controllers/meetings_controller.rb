@@ -1,7 +1,7 @@
 class MeetingsController < ApplicationController
     before_action :authenticate_user!
     
-    def index 
+    def index
         @meetings = Meeting.all
     end
 end

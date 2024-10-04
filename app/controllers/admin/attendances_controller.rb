@@ -1,4 +1,4 @@
-class Admin::MeetingsController < ApplicationController
+class Admin::AttendancesController < ApplicationController
     before_action :authenticate_user!
     before_action :require_admin
   
@@ -22,6 +22,6 @@ class Admin::MeetingsController < ApplicationController
     end
   
     def require_admin
-      redirect_to root_path unless current_user.admin?
+      redirect_to root_path, alert: 'Access Denied !' unless current_user.admin?
     end
 end

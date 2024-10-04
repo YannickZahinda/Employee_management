@@ -1,0 +1,26 @@
+<h1>Sick Leave Requests</h1>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sick_leaves.each do |leave| %>
+      <tr>
+        <td><%= leave.user.email %></td>
+        <td><%= leave.start_date %></td>
+        <td><%= leave.end_date %></td>
+        <td><%= leave.status %></td>
+        <td>
+          <%= button_to 'Approve', approve_admin_sick_leave_path(leave), method: :patch %>
+          <%= button_to 'Reject', reject_admin_sick_leave_path(leave), method: :patch %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

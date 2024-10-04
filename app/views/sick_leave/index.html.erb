@@ -1,0 +1,14 @@
+<h1>My Sick Leaves</h1>
+<%= link_to 'Request Sick Leave', new_sick_leave_path %>
+<ul>
+  <% @sick_leaves.present? %>
+    <% @sick_leaves.each do |leave| %>
+      <li>
+        <%= leave.start_date %> to <%= leave.end_date %> - 
+        Status: <%= leave.status %>
+      </li>
+    <% end %>
+  <% else %>
+    <p>Pas de Congés maladie pour le moment</p>
+  <% end %>
+</ul>

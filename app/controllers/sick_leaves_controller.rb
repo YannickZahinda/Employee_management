@@ -1,4 +1,4 @@
-class SickLeaveController < ApplicationController
+class SickLeavesController < ApplicationController
     def index 
         @sick_leaves = current_user.sick_leaves
     end

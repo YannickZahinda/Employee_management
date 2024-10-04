@@ -1,9 +1,9 @@
-class Admin::UsersController < ApplicationController
-    before_action: :authenticate_user!
-    before_action: :require_admin
+class Admin::UsersController < AdminController
+    before_action :authenticate_user!
+    before_action :require_admin
 
     def index
-      @users = User.where(role: :user)
+        @users = User.where(admin: false)
     end
 
     def new 
@@ -12,7 +12,7 @@ class Admin::UsersController < ApplicationController
 
     def create
         @user = User.new(user_params)
-        @user.password = Devise.friendly_token.first(8)
+        @user.password = Devise.friendly_token.first(8) if @user.password.blank?
 
         if @user.save 
             UserMailer.welcome_email(@user, @user.password).deliver_later
@@ -26,11 +26,11 @@ class Admin::UsersController < ApplicationController
     private 
 
     def user_params 
-        params.require(:user).permit(:email, :role)
+        params.require(:user).permit(:email, :admin, :password)
     end
 
     def require_admin
-        redirect_to root_path unless current_user.admin?
+        redirect_to root_path, alert: 'Access denied.' unless current_user.admin?
     end
 
 end

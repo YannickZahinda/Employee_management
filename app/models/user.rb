@@ -8,7 +8,11 @@ class User < ApplicationRecord
   has_many :meetings
   has_many :attendances
   has_many :holy_days
-  has_many :sick_leaves
+  has_many :sick_leaves, class_name: 'SickLeave'
 
-  enum role: { user: 0, admin: 1}
+  # enum role: { user: 0, admin: 1}
+
+  def admin?
+    admin 
+  end
 end

@@ -1,0 +1,11 @@
+<h1>My Reports</h1>
+<%= link_to 'New Report', new_report_path %>
+<ul>
+  <%if @report.present? %>
+    <% @reports.each do |report| %>
+      <li><%= report.title %> - <%= report.created_at.to_date %></li>
+    <% end %>
+  <% else %>
+    <p>Pas de rapport recu des employés pour le moment</p>
+  <% end %>
+</ul>

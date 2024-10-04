@@ -11,7 +11,7 @@ class Admin::MeetingsController < ApplicationController
         @meeting.admin = current_user
 
         if @meeting.save 
-            redirect_to meeting_path, notice: 'Meeting was successfully created !'
+            redirect_to meetings_path, notice: 'Meeting was successfully created !'
         else 
             render :new 
         end 
@@ -20,10 +20,10 @@ class Admin::MeetingsController < ApplicationController
     private 
 
     def meeting_params
-        params.require(:meetins).permit(:title, :description, :start_time, :end_time)
+        params.require(:meetings).permit(:title, :description, :start_time, :end_time)
     end
 
     def require_admin
-        redirect_to root_path unless current_user.admin?
+        redirect_to root_path, alert: 'Access Denied !' unless current_user.admin?
     end 
 end

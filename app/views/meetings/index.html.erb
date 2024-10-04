@@ -1,0 +1,16 @@
+<h1>Meetings</h1>
+
+<% if @meetings.any? %>
+  <ul>
+    <% @meetings.each do |meeting| %>
+      <li>
+        <%= meeting.title %> - 
+        <%= meeting.start_time.strftime("%B %d, %Y %I:%M %p") %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No meetings scheduled yet.</p>
+<% end %>
+
+<%= link_to 'Schedule New Meeting', new_admin_meeting_path %>

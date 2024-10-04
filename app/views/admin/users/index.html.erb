@@ -1,0 +1,16 @@
+<div>
+  <h1>Liste des employés</h1>
+  <%= link_to 'Ajouter un employé', new_admin_user_path %>
+  <% if @users.present? %>
+    <% @users.each do |user| %>
+      <ul>
+        <li><%= user.id%></li>
+        <li><%= user.email%></li>
+      </ul>
+    <% end %>
+    <% else %>
+      <p>Aucun employé enregistré</p>
+      
+    <% end %>
+
+</div
