@@ -1,0 +1,13 @@
+<h1>Rapport des employés</h1>
+<div>
+  <% if @reports.present? %>
+    <div>
+      <% @reports.each do |report|%>
+        <%= report.title %>
+        <%= report.content %>
+      <% end %>
+    </div>
+  <% else %>
+    <div>Pas de rapport envoyés par les employés</div>
+  <% end %>
+</div>

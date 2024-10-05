@@ -12,7 +12,8 @@ class User < ApplicationRecord
 
   # enum role: { user: 0, admin: 1}
 
-  def admin?
-    admin 
-  end
+  # def admin?
+  #   admin 
+  # end
+  
 end

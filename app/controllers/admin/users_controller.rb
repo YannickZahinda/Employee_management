@@ -6,6 +6,11 @@ class Admin::UsersController < AdminController
         @users = User.where(admin: false)
     end
 
+    def user_reports
+        @user = User.find(params[:id])
+        @reports = @user.reports
+    end
+
     def new 
         @user = User.new 
     end

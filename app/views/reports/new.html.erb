@@ -1,0 +1,11 @@
+<%= form_with model: @report, url: reports_path, data: { turbo: false } do |f| %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+
+  <%= f.submit 'Créer un rapport' %>
+<% end %>

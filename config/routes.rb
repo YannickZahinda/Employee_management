@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -10,7 +14,11 @@ Rails.application.routes.draw do
   resources :attendances, only: [:index]
 
   namespace :admin do 
-    resources :users, only: [:index, :new, :create]
+    resources :users, only: [:index, :new, :create] do
+      member do
+        get 'reports', to: 'users#user_reports'
+      end
+    end
     resources :sick_leaves, only: [:index] do
       member do
         patch :approve
@@ -19,5 +27,6 @@ Rails.application.routes.draw do
     end
     resources :meetings, only: [:new, :index, :create]
     resources :attendances, only: [:new, :create]
+    resources :reports, only: [:index]
   end
 end

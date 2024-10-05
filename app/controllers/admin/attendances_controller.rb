@@ -1,6 +1,10 @@
 class Admin::AttendancesController < ApplicationController
     before_action :authenticate_user!
     before_action :require_admin
+
+    def index 
+      @attendances = Attendance.all 
+    end
   
     def new
       @attendance = Attendance.new

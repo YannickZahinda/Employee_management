@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+    before_action :authorize_user, only: [:new, :create]
+
     def index
         @reports = current_user.reports
     end 
@@ -19,6 +21,12 @@ class ReportsController < ApplicationController
     private 
 
     def reports_params
-        params.require(:reports).permit(:title, :content)
+        params.require(:report).permit(:title, :content)
+    end
+
+    def authorize_user 
+        if current_user.admin?
+            redirect_to root_path, alert: 'administrateur ne peut créér un rapport; sinon parler à ingenieur '
+        end 
     end
 end

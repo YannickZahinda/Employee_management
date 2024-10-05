@@ -5,12 +5,11 @@
     <% @users.each do |user| %>
       <ul>
         <li><%= user.id%></li>
-        <li><%= user.email%></li>
+        <li><%= link_to user.email, reports_admin_user_path(user)%></li>
       </ul>
     <% end %>
-    <% else %>
+  <% else %>
       <p>Aucun employé enregistré</p>
-      
-    <% end %>
+  <% end %>
 
-</div
+</div>

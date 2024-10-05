@@ -13,13 +13,18 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <main class='mainpage'>
-      <% if current_user.admin? %>
-        <%= render 'shared/navbar' %>
+      <% if current_user.present? && current_user.admin? %>
+        <main class='mainpage'>
+          <%= render 'shared/navbar' %>
+          <%= yield %>
+        </main>
       <% else %>
-        <%= yield %>
+        <main class='mainpage'>
+
+          <%= yield %>
+        </main>
       <% end %>
-      <%= yield %>
-    </main>
+     
+   
   </body>
 </html>

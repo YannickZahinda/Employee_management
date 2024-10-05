@@ -1,0 +1,14 @@
+<h1>Reports for <%= @user.email %></h1>
+
+<% if @reports.present? %>
+  <ul>
+    <% @reports.each do |report| %>
+      <li>
+        <strong>Title:</strong> <%= report.title %><br>
+        <strong>Content:</strong> <%= report.content %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Pas de rapport courant de envoyé par employé</p>
+<% end %>
