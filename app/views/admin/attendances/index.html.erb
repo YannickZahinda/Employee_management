@@ -1,0 +1,21 @@
+<%= link_to 'Marquer une presence', new_admin_attendance_path %>
+<div>
+  <h1>Liste des présence</h1>
+
+  <% if @attendances.any? %>
+    <% @attendances.each do |attend| %>
+        <div>
+          <strong>Employé:</strong> <%= attend.user.email %> <br>
+          <strong>Status:</strong>
+          <% if attend.status == "absent" %>
+            <span style="color: red;">Absent</span>
+          <% else %>
+            <span style="color: green;">Present</span>
+          <% end %>
+        </div>
+    <% end %>
+  <% else %>
+      <p>No attendance records available.</p>
+  <% end %>
+
+</div>

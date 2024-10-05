@@ -1,0 +1,36 @@
+<h1>New Attendance Record</h1>
+
+<%= form_with model: @attendance, url: admin_attendances_path, local: true do |form| %>
+  <% if @attendance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
+
+      <ul>
+        <% @attendance.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.collection_select :user_id, User.all, :id, :email, prompt: 'Select User' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_select :date, start_year: Date.current.year, end_year: Date.current.year + 1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, Attendance.statuses.keys.map { |status| [status.humanize, status] } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Create Attendance' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', admin_attendances_path %>

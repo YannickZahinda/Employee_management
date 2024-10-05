@@ -1,3 +1,11 @@
 <div>
-  LIST OF ATTENDANCES..........
+  <h1>Liste des présence</h1>
+
+  <% if @attendances.any? %>
+    <% @attendances.each do |attend| %>
+      <div><%= attend.status %></div>
+    <% end %>
+  <% else %>
+    <div>Aucune présence enregistrée</div>
+  <% end %>
 </div>
