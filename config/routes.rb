@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   resources :reports, only: [:index, :new, :create]
   resources :sick_leaves, only: [:index, :new, :create]
   resources :meetings, only: [:index]
-  resources :attendances, only: [:index]
+  resources :attendances, only: [:index] do
+    collection do
+      get :all_attendance
+    end
+  end
+  
 
   namespace :admin do 
     resources :users, only: [:index, :new, :create] do
