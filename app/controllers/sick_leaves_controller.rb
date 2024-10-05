@@ -1,5 +1,5 @@
 class SickLeavesController < ApplicationController
-    # before_action :authorize_user, only: [:new, :create]
+    before_action :authorize_user, only: [:new, :create]
 
     def index 
         @sick_leaves = current_user.sick_leaves
