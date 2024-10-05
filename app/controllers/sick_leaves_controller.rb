@@ -1,16 +1,12 @@
 class SickLeavesController < ApplicationController
-    before_action :authenticate_user, only: [:new, :create]
+    # before_action :authorize_user, only: [:new, :create]
 
     def index 
         @sick_leaves = current_user.sick_leaves
-        respond_to do |format|
-            format.html # This will render index.html.erb
-            format.json { render json: @sick_leaves }
-        end
     end
 
     def new 
-        @sick_leaves = current_user.sick_leaves.build 
+        @sick_leave = current_user.sick_leaves.build 
     end 
 
     def create 
@@ -25,10 +21,10 @@ class SickLeavesController < ApplicationController
     private 
 
     def sick_leave_params
-        params.require(:sick_leaves).permit(:start_date, :end_date, :reason)
+        params.require(:sick_leave).permit(:start_date, :end_date, :reason)
     end
     
-    def authenticate_user
+    def authorize_user
         if current_user.admin?
             redirect_to root_path, alert: 'Administrateur ne peux demander un congé parler à ingenieur'
         end

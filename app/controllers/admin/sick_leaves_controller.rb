@@ -9,13 +9,13 @@ class Admin::SickLeavesController < ApplicationController
     def approve 
         @sick_leave = SickLeave.find(params[:id])
         @sick_leave.update(status: :approved)
-        redirect_to admin_sick_leaves_path, notice: 'Sick leave was approved.'
+        redirect_to admin_sick_leaves_path, notice: 'Votre congé a été approuvé'
     end
 
-    def approve 
+    def reject 
         @sick_leave = SickLeave.find(params[:id])
         @sick_leave.update(status: :rejected)
-        redirect_to admin_sick_leaves_path, notice: 'Sick leave was rejected'
+        redirect_to admin_sick_leaves_path, notice: 'Votre congé à été refusé'
     end
 
     private 

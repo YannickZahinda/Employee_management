@@ -1,14 +1,29 @@
-<h1>My Sick Leaves</h1>
-<%= link_to 'Request Sick Leave', new_sick_leafe_path %>
-<ul>
-  <% if @sick_leaves.present? %>
-    <% @sick_leaves.each do |leave| %>
-      <li>
-        <%= leave.start_date %> to <%= leave.end_date %> - 
-        Status: <%= leave.status %>
-      </li>
+<div>
+  <h1>Demande de congé maladie</h1>
+  <%= link_to 'Demander un congé', new_sick_leafe_path %>
+  <% if @sick_leaves.any? %>
+    <% @sick_leaves.each do |sick| %>
+        <div>
+          <strong>Employé:</strong> <%= sick.user.email %> <br>
+          <strong>Status:</strong>
+          <% if sick.status == "rejected" %>
+            <span style="color: red;">Rejecté</span>
+          <% elsif sick.status == "pending"%>
+            <span style="color: blue;">Pending</span>
+          <% else %>
+           <span style="color: green;">Apprové</span>
+          <% end %>
+          <% if sick.user == current_user || sick.status == "pending"%>
+            <em>(Ta demande de congé est entrain dêtre procédé)</em>
+          <% elsif sick.user == current_user || sick.status == "approved"%>
+            <em>(Ta demande de congé a été approuvée)</em>
+          <% else %>
+            <em>(Ta demande de congé a été rejeté)</em>
+          <% end %>
+        </div>
     <% end %>
   <% else %>
-    <p>Pas de Congés maladie pour le moment</p>
+      <p>Pas de congé maladie recemment enregistrés</p>
   <% end %>
-</ul>
+
+</div>
