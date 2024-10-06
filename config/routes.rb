@@ -33,5 +33,6 @@ Rails.application.routes.draw do
     resources :meetings, only: [:new, :index, :create]
     resources :attendances, only: [:new, :create, :index]
     resources :reports, only: [:index]
+    resources :home, only: [:index]
   end
 end

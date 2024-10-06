@@ -21,6 +21,7 @@ class Admin::UsersController < AdminController
 
         if @user.save 
             UserMailer.welcome_email(@user, @user.password).deliver_later
+            sign_in(@user)
             redirect_to admin_users_path, notice: 'User was successfully create.'
         else
             render :new 

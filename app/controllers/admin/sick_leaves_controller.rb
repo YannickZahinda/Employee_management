@@ -20,7 +20,13 @@ class Admin::SickLeavesController < ApplicationController
 
     private 
 
+    # def require_admin
+    #     redirect_to root_path, alert: 'Access Denied !' unless current_user.admin?
+    # end
+
     def require_admin
-        redirect_to root_path, alert: 'Access Denied !' unless current_user.admin?
+        if current_user && !current_user.admin?
+          redirect_to root_path, alert: 'Access denied.'
+        end
     end
 end

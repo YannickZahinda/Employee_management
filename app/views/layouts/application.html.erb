@@ -15,16 +15,16 @@
     <p class="alert"><%= alert %></p>
       <% if current_user.present? && current_user.admin? %>
         <main class='mainpage'>
+          <%= render 'shared/adminavbar' %>
+          <%= yield %>
+        </main>
+      <% elsif current_page?(root_path) %>
+        <main class='mainpage'>
           <%= render 'shared/navbar' %>
           <%= yield %>
         </main>
       <% else %>
-        <main class='mainpage'>
-
-          <%= yield %>
-        </main>
+        <%= yield %>
       <% end %>
-     
-   
   </body>
 </html>

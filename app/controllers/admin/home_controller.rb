@@ -4,7 +4,7 @@ class Admin::HomeController < AdminController
 
     def index
         @meetings = Meeting.all 
-        @sick_leaves = Sick_leave.all 
+        @sick_leaves = SickLeave.all 
         @attendances = Attendance.all 
         @holy_days = HolyDay.all 
         @reports = Report.all
