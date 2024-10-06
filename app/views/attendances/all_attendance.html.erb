@@ -1,20 +1,59 @@
-<div>
-  <h1>Liste des présence</h1>
+<div class="min-h-screen bg-gray-100 py-10">
+  <div class="container mx-auto px-4">
+    <h1 class="text-4xl font-semibold text-gray-800 mb-6 text-center">Liste des Présences</h1>
 
-  <% if @attendances.any? %>
-    <% @attendances.each do |attend| %>
-        <div>
-          <strong>Employé:</strong> <%= attend.user.email %> <br>
-          <strong>Status:</strong>
-          <% if attend.status == "absent" %>
-            <span style="color: red;">Absent</span>
-          <% else %>
-            <span style="color: green;">Present</span>
+    <div class="flex justify-center mb-4">
+      <input type="radio" name="tab" id="presentTab" class="hidden peer" checked>
+      <label for="presentTab" class="bg-blue-500 text-white py-2 px-4 rounded-l-lg cursor-pointer peer-checked:bg-blue-600 transition duration-300">Présents</label>
+
+      <input type="radio" name="tab" id="absentTab" class="hidden peer">
+      <label for="absentTab" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-r-lg cursor-pointer peer-checked:bg-gray-300 transition duration-300">Absents</label>
+    </div>
+
+    <div class="tab-content">
+      <div id="present" class="hidden peer-checked:block">
+        <% if @attendances.any? %>
+          <% @attendances.each do |attend| %>
+            <% if attend.status == "present" %>
+              <div class="bg-white shadow-md rounded-lg p-4 mb-4">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <strong class="text-gray-700">Employé:</strong>
+                    <span class="ml-2 text-gray-800"><%= attend.user.email %></span>
+                  </div>
+                  <% if attend.user == current_user %>
+                    <em class="ml-2 text-blue-500 italic">(Your attendance)</em>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
           <% end %>
-        </div>
-    <% end %>
-  <% else %>
-      <p>No attendance records available.</p>
-  <% end %>
+        <% else %>
+          <p class="text-center text-gray-600 mt-4">Pas de rapports de présence disponibles.</p>
+        <% end %>
+      </div>
 
+      <div id="absent" class="hidden peer-checked:block">
+        <% if @attendances.any? %>
+          <% @attendances.each do |attend| %>
+            <% if attend.status == "absent" %>
+              <div class="bg-white shadow-md rounded-lg p-4 mb-4">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <strong class="text-gray-700">Employé:</strong>
+                    <span class="ml-2 text-gray-800"><%= attend.user.email %></span>
+                  </div>
+                  <% if attend.user == current_user %>
+                    <em class="ml-2 text-blue-500 italic">(Your attendance)</em>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% else %>
+          <p class="text-center text-gray-600 mt-4">Pas de rapports d'absence disponibles.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

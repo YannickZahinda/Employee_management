@@ -1,19 +1,48 @@
-<h1>Meetings</h1>
+<div class="min-h-screen bg-gray-100 py-10">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-semibold text-gray-800">Réunions ultérieures</h1>
+    </div>
 
-<% if @meetings.present? %>
-  <ul>
-    <% @meetings.each do |meeting| %>
-      <li>
-        <%= meeting.title %> - 
-        <%= meeting.start_time.strftime("%B %d, %Y %I:%M %p") %>
-      </li>
-      <h4>Description</h4>
-       <p>Created by admin with id: <%= meeting.admin.email%></p>
-      <p><%= meeting.description %></p>
+    <% if @meetings.present? %>
+      <div class="overflow-x-auto w-screen">
+        <table class="w-full bg-white shadow-md rounded-lg">
+          <thead>
+            <tr>
+              <th class="px-8 py-4 bg-gray-50 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">Créée par</th>
+              <th class="px-8 py-4 bg-gray-50 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">Raison de la réunion</th>
+              <th class="px-8 py-4 bg-gray-50 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">Début</th>
+              <th class="px-8 py-4 bg-gray-50 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">Fin</th>
+              <th class="px-8 py-4 bg-gray-50 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-300">
+            <% @meetings.each do |meet| %>
+              <tr>
+                <td class="px-5 py-4 whitespace-nowrap text-md text-gray-700 border">
+                  <%= meet.admin.email %>
+                </td>
+                <td class="px-8 py-4 whitespace-nowrap text-md text-gray-900 border">
+                  <%= meet.description %>
+                </td>
+                <td class="px-8 py-4 whitespace-nowrap text-md text-gray-700 border">
+                  <%= meet.start_time.strftime("%B %d, %Y at %I:%M %p") %>
+                </td>
+                <td class="px-8 py-4 whitespace-nowrap text-md text-gray-700 border">
+                  <%= meet.end_time.strftime("%B %d, %Y at %I:%M %p") %>
+                </td>
+                <td class="px-8 py-4 whitespace-nowrap text-md text-blue-600 hover:underline border">
+                  <%= link_to 'View Details', class: 'text-blue-600 hover:underline' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="text-center">
+        <p class="text-gray-500 text-xl">No meetings scheduled yet.</p>
+      </div>
     <% end %>
-  </ul>
-<% else %>
-  <p>No meetings scheduled yet.</p>
-<% end %>
-
-<%= link_to 'Schedule New Meeting', new_admin_meeting_path %>
+  </div>
+</div>

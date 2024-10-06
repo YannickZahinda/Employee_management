@@ -1,9 +1,41 @@
-<nav>
-  <ul class='navbar'>
-    <li><%= link_to 'Meeting', meetings_path %></li>
-    <li><%= link_to 'Rapports', reports_path %></li>
-    <li><%= link_to 'Congés Maladie', sick_leaves_path %></li>
-    <li><%= link_to 'Presences', attendances_path %></li>
-    <li><%= link_to 'Employés', admin_users_path %></li>
-  </ul>
-</nav>
+<div class="flex min-h-screen bg-gray-100">
+  <!-- Sidebar -->
+  <div class="flex flex-col w-64 bg-white border-r">
+    <div class="flex items-center justify-center h-14 border-b">
+      <h2 class="text-xl font-semibold text-gray-800">Tableau de bord employé</h2>
+    </div>
+    <nav class="flex-grow">
+      <%= link_to root_path, class: "flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 #{current_page?(root_path) ? 'bg-gray-100' : ''}" do %>
+        <svg class="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+        <span class="text-sm">Tableau de bord</span>
+      <% end %>
+
+      <%= link_to meetings_path, class: "flex items-center px-4 py-2 mt-1 text-gray-700 hover:bg-gray-100 #{current_page?(meetings_path) ? 'bg-gray-100' : ''}" do %>
+        <svg class="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+        <span class="text-sm">Réunions</span>
+      <% end %>
+
+      <%= link_to reports_path, class: "flex items-center px-4 py-2 mt-1 text-gray-700 hover:bg-gray-100 #{current_page?(reports_path) ? 'bg-gray-100' : ''}" do %>
+        <svg class="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        <span class="text-sm">Rapports</span>
+      <% end %>
+
+      <%= link_to sick_leaves_path, class: "flex items-center px-4 py-2 mt-1 text-gray-700 hover:bg-gray-100 #{current_page?(sick_leaves_path) ? 'bg-gray-100' : ''}" do %>
+        <svg class="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
+        <span class="text-sm">Congé maladie</span>
+      <% end %>
+
+      <%= link_to attendances_path, class: "flex items-center px-4 py-2 mt-1 text-gray-700 hover:bg-gray-100 #{current_page?(attendances_path) ? 'bg-gray-100' : ''}" do %>
+        <svg class="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012 2h2a2 2 0 012-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+        <span class="text-sm">Présences</span>
+      <% end %>
+    </nav>
+  </div>
+
+  <!-- Main content -->
+  <div class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+    <div class="container mx-auto px-6 py-8">
+      <%= yield %>
+    </div>
+  </div>
+</div>

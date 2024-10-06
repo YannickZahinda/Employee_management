@@ -1,21 +1,42 @@
-<%= link_to 'Marquer une presence', new_admin_attendance_path %>
-<div>
-  <h1>Liste des présence</h1>
+<div class="min-h-screen bg-gray-100 py-10">
+  <div class="container mx-auto px-4">
+    <div class="mb-6 text-center">
+      <%= link_to 'Marquer une présence', new_admin_attendance_path, class: "bg-blue-500 text-white font-semibold py-2 px-4 rounded shadow hover:bg-blue-600 transition" %>
+    </div>
 
-  <% if @attendances.any? %>
-    <% @attendances.each do |attend| %>
-        <div>
-          <strong>Employé:</strong> <%= attend.user.email %> <br>
-          <strong>Status:</strong>
-          <% if attend.status == "absent" %>
-            <span style="color: red;">Absent</span>
-          <% else %>
-            <span style="color: green;">Present</span>
-          <% end %>
-        </div>
+    <h1 class="text-4xl font-semibold text-gray-800 mb-8 text-center">Liste des présences</h1>
+    
+    <% if @attendances.any? %>
+      <div class="overflow-x-auto bg-white shadow-lg rounded-lg">
+        <table class="min-w-full">
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">ID</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Employé</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @attendances.each do |attend| %>
+              <tr class="border-b">
+                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.id %></td>
+                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.email %></td>
+                <td class="py-2 px-4 text-sm text-gray-700">
+                  <% if attend.status == "absent" %>
+                    <span class="text-red-500 font-bold">Absent</span>
+                  <% else %>
+                    <span class="text-green-500 font-bold">Présent</span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+        <p class="text-lg text-gray-700">Aucun enregistrement de présence disponible.</p>
+      </div>
     <% end %>
-  <% else %>
-      <p>No attendance records available.</p>
-  <% end %>
-
+  </div>
 </div>

@@ -1,14 +1,22 @@
-<h1>Reports for <%= @user.email %></h1>
+<div class="min-h-screen bg-gray-100 py-10">
+  <div class="container mx-auto px-4">
+    <h1 class="text-4xl font-semibold text-gray-800 mb-8 text-center">Rapport de <%= @user.email %></h1>
 
-<% if @reports.present? %>
-  <ul>
-    <% @reports.each do |report| %>
-      <li>
-        <strong>Title:</strong> <%= report.title %><br>
-        <strong>Content:</strong> <%= report.content %>
-      </li>
+    <% if @reports.present? %>
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <ul class="space-y-4">
+          <% @reports.each do |report| %>
+            <li class="border-b pb-4">
+              <strong class="text-lg text-gray-700">Titre:</strong> <%= report.title %><br>
+              <strong class="text-lg text-gray-700">Contenu:</strong> <%= report.content %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% else %>
+      <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+        <p class="text-lg text-gray-700">Pas de rapport courant de envoyé par employé</p>
+      </div>
     <% end %>
-  </ul>
-<% else %>
-  <p>Pas de rapport courant de envoyé par employé</p>
-<% end %>
+  </div>
+</div>
