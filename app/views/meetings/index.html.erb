@@ -5,8 +5,9 @@
     </div>
 
     <% if @meetings.present? %>
-      <div class="overflow-x-auto w-screen">
-        <table class="w-full bg-white shadow-md rounded-lg">
+      <!-- Overflow X scroll added to the container -->
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white shadow-md rounded-lg">
           <thead>
             <tr>
               <th class="px-8 py-4 bg-gray-50 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">Créée par</th>

@@ -25,7 +25,7 @@
             </div>
           </div>
           <p class="mt-2 text-gray-600">
-            <% if sick.user == current_user %>
+            <% if sick.user == current_user && sick.status == "pending"%>
               <em>(Ta demande de congé est en cours de traitement)</em>
             <% elsif sick.status == "approved" %>
               <em>(Ta demande de congé a été approuvée)</em>
