@@ -16,6 +16,7 @@ class Admin::UsersController < AdminController
     end
 
     def create
+        # Rails.logger.debug("User Params: #{user_params.inspect}")
         @user = User.new(user_params)
         @user.password = Devise.friendly_token.first(8) if @user.password.blank?
 
@@ -31,9 +32,22 @@ class Admin::UsersController < AdminController
 
     private 
 
-    def user_params 
-        params.require(:user).permit(:email, :admin, :password)
+    def user_params
+        params.require(:user).permit(
+          :email, 
+          :name, 
+          :position, 
+          :date_of_birth, 
+          :sex, 
+          :date_of_joining, 
+          :id_card, 
+          :admin, 
+          :password, 
+          :password_confirmation
+        )
     end
+      
+      
 
     def require_admin
         redirect_to root_path, alert: 'Access denied.' unless current_user.admin?

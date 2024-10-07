@@ -23,6 +23,36 @@
         </div>
 
         <div class="mb-4">
+          <%= f.label :name, class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= f.text_field :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :position, class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= f.text_field :position, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :date_of_birth, class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= f.date_field :date_of_birth, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :sex, class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= f.select :sex, options_for_select(['Male', 'Female', 'Other']), {}, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :date_of_joining, class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= f.date_field :date_of_joining, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :id_card, class: "block text-gray-700 text-sm font-bold mb-2" %>
+          <%= f.file_field :id_card, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        </div>
+
+        <div class="mb-4">
           <%= f.label :admin, class: "inline-flex items-center" %>
           <%= f.check_box :admin, class: "form-checkbox h-5 w-5 text-green-600 transition duration-150 ease-in-out" %>
           <span class="ml-2 text-gray-700">Admin</span>
