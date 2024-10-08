@@ -1,0 +1,34 @@
+<section class="p-6 bg-white rounded-lg shadow-md">
+  <h3 class="text-xl font-semibold">Bienvenue <%= current_user.name %></h3>
+  
+  <div class="mt-4">
+    <p class="text-gray-700">Bienvenue sur la plateforme de gérance employés</p>
+  </div>
+
+  <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="bg-gray-100 p-4 rounded-lg shadow">
+      <h4 class="text-lg font-semibold">Total des rapports reçus</h4>
+      <p class="text-2xl font-bold"><%= @total_reports %></p>
+    </div>
+    <div class="bg-gray-100 p-4 rounded-lg shadow">
+      <h4 class="text-lg font-semibold">Réunions planifiées</h4>
+      <p class="text-2xl font-bold"><%= @total_meetings %></p>
+    </div>
+    <div class="bg-gray-100 p-4 rounded-lg shadow">
+      <h4 class="text-lg font-semibold">Total des demande de congé</h4>
+      <p class="text-2xl font-bold"><%= @total_sick_leaves %></p>
+    </div>
+    <div class="bg-gray-100 p-4 rounded-lg shadow">
+      <h4 class="text-lg font-semibold">Total des presences enregistrées</h4>
+      <p class="text-2xl font-bold"><%= @total_presents_employees %></p>
+    </div>
+    <div class="bg-gray-100 p-4 rounded-lg shadow">
+      <h4 class="text-lg font-semibold">Total des absences enregistrées</h4>
+      <p class="text-2xl font-bold"><%= @total_absents_employees %></p>
+    </div>
+  </div>
+
+  <div class="mt-6">
+    <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you want to log out?' }, class: "bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600" %>
+  </div>
+</section>

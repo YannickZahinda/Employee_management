@@ -1,0 +1,93 @@
+<div class="min-h-screen bg-gray-100 py-10">
+  <div class="container mx-auto px-4">
+    <h1 class="text-4xl font-semibold text-gray-800 mb-6 text-center">Liste des Présences et/ou absences</h1>
+
+    <div class="flex justify-center mb-4">
+      <button id="presentTab" class="tab-button bg-blue-500 text-white py-2 px-4 rounded-l-lg focus:outline-none" onclick="showTab('present')">Présents</button>
+      <button id="absentTab" class="tab-button bg-gray-200 text-gray-700 py-2 px-4 rounded-r-lg hover:bg-gray-300 focus:outline-none" onclick="showTab('absent')">Absents</button>
+    </div>
+
+    <div id="present" class="tab-content hidden">
+      <% if @attendances.any? %>
+        <% @attendances.each do |attend| %>
+          <% if attend.status == "present" %>
+            <div class="bg-white shadow-md rounded-lg p-4 mb-4">
+              <div class="flex justify-between items-center">
+                <div>
+                  <strong class="text-gray-700">Employé:</strong>
+                  <span class="ml-2 text-gray-800"><%= attend.user.email %></span>
+                </div>
+                <% if attend.user == current_user %>
+                  <em class="ml-2 text-blue-500 italic">(Your attendance)</em>
+                <% end %>
+              </div>
+              <div class="mt-2 text-sm text-gray-600">
+                <strong>Date et Heure:</strong> <%= attend.created_at.strftime("%A, %d %B %Y, %H:%M") %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p class="text-center text-gray-600 mt-4">Pas de rapports de présence disponibles.</p>
+      <% end %>
+    </div>
+
+    <div id="absent" class="tab-content hidden">
+      <% if @attendances.any? %>
+        <% @attendances.each do |attend| %>
+          <% if attend.status == "absent" %>
+            <div class="bg-white shadow-md rounded-lg p-4 mb-4">
+              <div class="flex justify-between items-center">
+                <div>
+                  <strong class="text-gray-700">Employé:</strong>
+                  <span class="ml-2 text-gray-800"><%= attend.user.email %></span>
+                </div>
+                <% if attend.user == current_user %>
+                  <em class="ml-2 text-blue-500 italic">(Your attendance)</em>
+                <% end %>
+              </div>
+              <div class="mt-2 text-sm text-gray-600">
+                <strong>Date et Heure:</strong> <%= attend.created_at.strftime("%A, %d %B %Y, %H:%M") %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p class="text-center text-gray-600 mt-4">Pas de rapports d'absence disponibles.</p>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function showTab(tabName) {
+    // Hide all tab content
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabContents.forEach(tab => {
+      tab.classList.add('hidden');
+    });
+
+    // Remove active class from all tab buttons
+    const tabButtons = document.querySelectorAll('.tab-button');
+    tabButtons.forEach(button => {
+      button.classList.remove('bg-blue-500', 'text-white');
+      button.classList.add('bg-gray-200', 'text-gray-700');
+    });
+
+    // Show the selected tab
+    document.getElementById(tabName).classList.remove('hidden');
+
+    // Highlight the active tab button
+    if (tabName === 'present') {
+      document.getElementById('presentTab').classList.add('bg-blue-500', 'text-white');
+    } else {
+      document.getElementById('absentTab').classList.add('bg-blue-500', 'text-white');
+    }
+  }
+
+  // Show the present tab by default
+  document.addEventListener('DOMContentLoaded', () => {
+    showTab('present');
+  });
+</script>

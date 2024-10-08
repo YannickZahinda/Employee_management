@@ -1,0 +1,42 @@
+<div class="min-h-screen bg-gray-100 py-10">
+  <div class="container mx-auto px-4">
+    <h1 class="text-4xl font-semibold text-gray-800 mb-6 text-center">Demande de Congé Maladie</h1>
+    <div class="flex justify-center mb-4">
+      <%= link_to 'Demander un congé', new_sick_leafe_path, class: 'bg-blue-500 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300' %>
+    </div>
+    
+    <% if @sick_leaves.any? %>
+      <% @sick_leaves.each do |sick| %>
+        <div class="bg-white shadow-md rounded-lg p-4 mb-4">
+          <div class="flex justify-between items-center">
+            <div>
+              <strong class="text-gray-700">Employé:</strong>
+              <span class="ml-2 text-gray-800"><%= sick.user.email %></span>
+            </div>
+            <div>
+              <strong class="text-gray-700">Status:</strong>
+              <% if sick.status == "rejected" %>
+                <span class="text-red-500">Rejecté</span>
+              <% elsif sick.status == "pending" %>
+                <span class="text-blue-500">En Attente</span>
+              <% else %>
+                <span class="text-green-500">Apprové</span>
+              <% end %>
+            </div>
+          </div>
+          <p class="mt-2 text-gray-600">
+            <% if sick.user == current_user && sick.status == "pending"%>
+              <em>(Ta demande de congé est en cours de traitement)</em>
+            <% elsif sick.status == "approved" %>
+              <em>(Ta demande de congé a été approuvée)</em>
+            <% elsif sick.status == "rejected" %>
+              <em>(Ta demande de congé a été rejetée)</em>
+            <% end %>
+          </p>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-center text-gray-600 mt-4">Pas de congé maladie récemment enregistrés.</p>
+    <% end %>
+  </div>
+</div>
