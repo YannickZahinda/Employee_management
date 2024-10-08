@@ -44,6 +44,8 @@ gem "bootsnap", require: false
 
 gem "tailwindcss-rails"
 
+gem 'rqrcode'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -76,3 +78,7 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
+
+gem "aws-sdk-s3", "~> 1.167", :require => false

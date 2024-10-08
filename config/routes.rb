@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       get :all_attendance
     end
   end
+  resources :qr_codes, only: [:create, :show]
+  post 'qr_codes/scan', to: 'qr_codes#scan'
   
 
   namespace :admin do 
