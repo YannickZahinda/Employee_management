@@ -61,9 +61,11 @@ class Admin::UsersController < AdminController
         # Get the host
         host = Rails.application.routes.default_url_options[:host] || 'localhost:3000'
     
+        url = user_attendances_url(host: host)
         # Create the QR code object using user_url
-        qr_code = RQRCode::QRCode.new(admin_users_url(user, host: host))
-    
+        # qr_code = RQRCode::QRCode.new(user_attendances_url(user, host: host))
+        qr_code = RQRCode::QRCode.new(url)
+
         # Create the PNG object
         png = qr_code.as_png(
           bit_depth: 1,
@@ -76,7 +78,8 @@ class Admin::UsersController < AdminController
         )
     
         # Attach the PNG to the user model
-        user.qr_code.attach(io: StringIO.new(png.to_s), filename: 'qrcode.png', content_type: 'image/png')
+        # user.qr_code.attach(io: StringIO.new(png.to_s), filename: 'qrcode.png', content_type: 'image/png')
+        user.qr_code.attach(io: StringIO.new(png.to_s), filename: "#{user.id}_qrcode.png", content_type: 'image/png')
     end
 
 end

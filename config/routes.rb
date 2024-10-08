@@ -37,4 +37,8 @@ Rails.application.routes.draw do
     resources :reports, only: [:index]
     resources :home, only: [:index]
   end
+
+  namespace :user do 
+    resources :attendances, only: [:index, :new, :create]
+  end
 end
