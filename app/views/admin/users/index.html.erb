@@ -18,6 +18,7 @@
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Date de naissance</th>
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Sexe</th>
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Date d'embauche</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">QR CODE</th>
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Carte d'identité</th>
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Rapports</th>
             </tr>
@@ -32,6 +33,13 @@
                 <td class="py-2 px-4 text-sm text-gray-700"><%= user.date_of_birth&.strftime('%d/%m/%Y') %></td>
                 <td class="py-2 px-4 text-sm text-gray-700"><%= user.sex %></td>
                 <td class="py-2 px-4 text-sm text-gray-700"><%= user.date_of_joining&.strftime('%d/%m/%Y') %></td>
+                <td class="py-2 px-4 text-sm text-gray-700">
+                  <% if user.qr_code.present? %>
+                    <%= image_tag(url_for(user.qr_code)) %>
+                  <% else %>
+                    No QR Code
+                  <% end %>
+                </td>
                 <td class="py-2 px-4 text-sm text-gray-700">
                   <% if user.id_card.attached? %>
                     <%= link_to 'Voir', rails_blob_path(user.id_card, disposition: "attachment"), class: "text-blue-500 hover:underline" %>

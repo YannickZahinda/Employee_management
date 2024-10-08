@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       get :all_attendance
     end
   end
+  resources :qr_codes, only: [:create, :show]
+  post 'qr_codes/scan', to: 'qr_codes#scan'
   
 
   namespace :admin do 
@@ -34,5 +36,9 @@ Rails.application.routes.draw do
     resources :attendances, only: [:new, :create, :index]
     resources :reports, only: [:index]
     resources :home, only: [:index]
+  end
+
+  namespace :user do 
+    resources :attendances, only: [:index, :new, :create]
   end
 end

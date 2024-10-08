@@ -12,7 +12,6 @@ class Admin::AttendancesController < ApplicationController
   
     def create
       @attendance = Attendance.new(attendance_params)
-      puts attendance_params.inspect
       if @attendance.save
         redirect_to admin_attendances_path, notice: 'Attendance was successfully recorded.'
       else
