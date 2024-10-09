@@ -14,7 +14,7 @@
 <body class="bg-gray-100">
   <% if user_signed_in? && current_user.present? && current_user.admin? %>
     <%= render 'shared/adminavbar' %>
-  <% elsif user_signed_in? && (current_page?(root_path) || current_page?(meetings_path) || current_page?(reports_path) || current_page?(new_report_path) || current_page?(sick_leaves_path) || current_page?(new_sick_leafe_path) || current_page?(attendances_path)) %>
+  <% elsif user_signed_in? && (current_page?(root_path) || current_page?(meetings_path) || current_page?(reports_path) || current_page?(new_report_path) || current_page?(users_path) || current_page?(sick_leaves_path) || current_page?(new_sick_leafe_path) || current_page?(attendances_path)) %>
     <main class="mainpage">
       <%= render 'shared/navbar' %>
     </main>
