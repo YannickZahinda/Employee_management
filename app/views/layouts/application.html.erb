@@ -8,10 +8,11 @@
   <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
+  <%= javascript_include_tag 'https://rawgit.com/schmich/instascan-builds/master/instascan.min.js' %>
 </head>
 
 <body class="bg-gray-100">
-  <% if current_user.present? && current_user.admin? %>
+  <% if user_signed_in? && current_user.present? && current_user.admin? %>
     <%= render 'shared/adminavbar' %>
   <% elsif user_signed_in? && (current_page?(root_path) || current_page?(meetings_path) || current_page?(reports_path) || current_page?(new_report_path) || current_page?(sick_leaves_path) || current_page?(new_sick_leafe_path) || current_page?(attendances_path)) %>
     <main class="mainpage">

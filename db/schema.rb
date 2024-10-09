@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_07_090030) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_08_120109) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_07_090030) do
     t.integer "admin_id"
   end
 
+  create_table "qr_codes", force: :cascade do |t|
+    t.string "code"
+    t.datetime "expires_at"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_qr_codes_on_user_id"
+  end
+
   create_table "reports", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -98,10 +107,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_07_090030) do
     t.string "sex"
     t.date "date_of_joining"
     t.string "id_card"
+    t.string "qr_code"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "qr_codes", "users"
 end
