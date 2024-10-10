@@ -29,6 +29,12 @@
         <svg class="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012 2h2a2 2 0 012-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
         <span class="text-sm">Présences</span>
       <% end %>
+      <%= link_to users_path, class: "flex items-center px-4 py-2 mt-1 text-gray-700 hover:bg-gray-100 #{current_page?(users_path) ? 'bg-gray-100' : ''}" do %>
+        <svg class="w-5 h-5 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A2 2 0 016 16h12a2 2 0 01.879 3.804l-2.878 1.439a2 2 0 01-1.784 0L12 19l-2.217 1.11a2 2 0 01-1.784 0l-2.878-1.439zM7 10a5 5 0 1110 0v1.035A9.001 9.001 0 0112 12a9.001 9.001 0 01-5-0.965V10z"></path>
+        </svg>
+        <span class="text-sm">Employés/Utilisateurs</span>
+      <% end %>
     </nav>
   </div>
 

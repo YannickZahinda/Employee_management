@@ -1,0 +1,61 @@
+<div class="min-h-screen bg-gray-100 py-10">
+  <div class="container mx-auto px-4">
+
+    <h1 class="text-4xl font-semibold text-gray-800 mb-8 text-center">Liste des employés</h1>
+    
+    <% if @users.present? %>
+      <div class="overflow-x-auto bg-white shadow-lg rounded-lg">
+        <table class="min-w-full">
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">ID</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Nom</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Email</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Position</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Date de naissance</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Sexe</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Date d'embauche</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">QR CODE</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Carte d'identité</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Rapports</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr class="border-b">
+                <td class="py-2 px-4 text-sm text-gray-700"><%= user.id %></td>
+                <td class="py-2 px-4 text-sm text-gray-700"><%= user.name %></td>
+                <td class="py-2 px-4 text-sm text-gray-700"><%= user.email %></td>
+                <td class="py-2 px-4 text-sm text-gray-700"><%= user.position %></td>
+                <td class="py-2 px-4 text-sm text-gray-700"><%= user.date_of_birth&.strftime('%d/%m/%Y') %></td>
+                <td class="py-2 px-4 text-sm text-gray-700"><%= user.sex %></td>
+                <td class="py-2 px-4 text-sm text-gray-700"><%= user.date_of_joining&.strftime('%d/%m/%Y') %></td>
+                <td class="py-2 px-4 text-sm text-gray-700">
+                  <% if user.qr_code.present? %>
+                    <%= image_tag(url_for(user.qr_code)) %>
+                  <% else %>
+                    No QR Code
+                  <% end %>
+                </td>
+                <td class="py-2 px-4 text-sm text-gray-700">
+                  <% if user.id_card.attached? %>
+                    <%= link_to 'Voir', rails_blob_path(user.id_card, disposition: "attachment"), class: "text-blue-500 hover:underline" %>
+                  <% else %>
+                    Non fournie
+                  <% end %>
+                </td>
+                <td class="py-2 px-4 text-sm text-gray-700">
+                  <%= link_to 'Voir les rapports', reports_admin_user_path(user), class: "text-blue-500 hover:underline" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+        <p class="text-lg text-gray-700">Aucun employé enregistré.</p>
+      </div>
+    <% end %>
+  </div>
+</div>
