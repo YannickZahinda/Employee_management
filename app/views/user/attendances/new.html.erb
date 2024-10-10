@@ -23,6 +23,7 @@
     <%= form.select :status, Attendance.statuses.keys.map { |status| [status.humanize, status] }, {}, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" %>
   </div>
   <div class="mb-4">
+    <%= form.label :heures_de_travaille, class: "block text-sm font-medium text-gray-700" %>
     <%= form.number_field :worked_hours, step: 0.5 %>
   </div>
 
