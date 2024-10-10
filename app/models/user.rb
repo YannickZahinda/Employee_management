@@ -15,6 +15,10 @@ class User < ApplicationRecord
   has_one_attached :qr_code
   has_one_attached :id_card
 
+  def total_worked_hours 
+    attendances.where(status: :present).sum(:worked_hours)
+  end
+
   # before_commit :generate_qrcode, on: :create
 
   # private 

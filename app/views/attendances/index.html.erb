@@ -15,7 +15,18 @@
               <div class="flex justify-between items-center">
                 <div>
                   <strong class="text-gray-700">Employé:</strong>
-                  <span class="ml-2 text-gray-800"><%= attend.user.email %></span>
+                  <span class="ml-2 text-gray-800"><%= attend.user.name %></span>
+                </div>
+                <div>
+                  <strong class="text-gray-700"><em>Heures travaillées </em>:</strong>
+                  # <span class="ml-2 text-gray-800"><%= attend.worked_hours %>hrs</span>
+                  <span class="py-2 px-4 text-sm text-gray-700">
+                    <% if attend.worked_hours.present? %>
+                      <%= attend.worked_hours %> heures
+                    <% else %>
+                      Pas enregistrée
+                    <% end %>
+                  </span>
                 </div>
                 <% if attend.user == current_user %>
                   <em class="ml-2 text-blue-500 italic">(Your attendance)</em>

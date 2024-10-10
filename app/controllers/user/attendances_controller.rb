@@ -21,7 +21,7 @@ class User::AttendancesController < ApplicationController
     private
   
     def attendance_params
-      params.require(:attendance).permit(:status, :date)
+      params.require(:attendance).permit(:status, :date, :worked_hours)
     end
   end
   

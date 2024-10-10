@@ -16,6 +16,7 @@
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Poste</th>
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Status</th>
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Date</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Heures travaillées</th>
             </tr>
           </thead>
           <tbody>
@@ -32,6 +33,13 @@
                   <% end %>
                 </td>
                 <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.created_at.strftime("%B %d at %I:%M %p") %></td>
+                <td class="py-2 px-4 text-sm text-gray-700">
+                  <% if attend.worked_hours.present? %>
+                    <%= attend.worked_hours %> heures
+                  <% else %>
+                    Pas enregistrée
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>
