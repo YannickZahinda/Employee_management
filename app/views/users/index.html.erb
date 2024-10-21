@@ -31,10 +31,16 @@
                 <td class="py-2 px-4 text-sm text-gray-700"><%= user.sex %></td>
                 <td class="py-2 px-4 text-sm text-gray-700"><%= user.date_of_joining&.strftime('%d/%m/%Y') %></td>
                 <td class="py-2 px-4 text-sm text-gray-700">
-                  <% if user.qr_code.present? %>
+                  <% if current_user.admin? %>
+                    <% if user.qr_code.present? %>
+                      <%= image_tag(url_for(user.qr_code)) %>
+                    <% else %>
+                      No QR Code
+                    <% end %>
+                  <% elsif current_user == user && user.qr_code.present? %>
                     <%= image_tag(url_for(user.qr_code)) %>
                   <% else %>
-                    No QR Code
+                    Pas de QR Code ou accès interdit
                   <% end %>
                 </td>
                 <td class="py-2 px-4 text-sm text-gray-700">
