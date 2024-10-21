@@ -1,0 +1,54 @@
+<!-- app/views/admin/users/index.html.erb -->
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Attendance Rate</th>
+      <th>Average Daily Hours</th>
+      <th>Suggestions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @users.present? %>
+        <% @users.each do |user| %>
+          <% analysis = @performance_analyses[user.id] %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= number_to_percentage(analysis[:metrics][:attendance_rate], precision: 2) %></td>
+            <td><%= number_with_precision(analysis[:metrics][:average_daily_hours], precision: 2) %></td>
+            <td>
+              <ul>
+                <% analysis[:suggestions].each do |suggestion| %>
+                  <li><%= suggestion %></li>
+                <% end %>
+              </ul>
+            </td>
+          </tr>
+        <% end %>
+    <% else %>
+        <tr>
+            <td colspan="5">No users found</td>
+        </tr>
+    <% end %>
+
+    # <tbody>
+    #     <% if @users.present? %>
+    #       <% @users.each do |user| %>
+    #         <% analysis = @performance_analyses[user.id] %>
+    #         <tr>
+    #           <td><%= user.name %></td>
+    #         </tr>
+    #       <% end %>
+    #     <% else %>
+    #       <tr>
+    #         <td colspan="5">No users found</td>
+    #       </tr>
+    #     <% end %>
+    # </tbody>
+
+  </tbody>
+</table>

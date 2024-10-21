@@ -33,7 +33,9 @@
                     <span class="text-green-500 font-bold">Présent</span>
                   <% end %>
                 </td>
-                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.created_at.strftime("%B %d at %I:%M %p") %></td>
+                <td class="py-2 px-4 text-sm text-gray-700">
+                  <%= attend.date.in_time_zone('Africa/Harare').strftime("%B %d at %I:%M %p") %>
+                </td>
                 <td class="py-2 px-4 text-sm text-gray-700">
                   <% if attend.worked_hours.present? %>
                     <%= attend.worked_hours %> heures

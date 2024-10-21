@@ -21,6 +21,7 @@
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">QR CODE</th>
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Carte d'identité</th>
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Rapports</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Performances</th>
             </tr>
           </thead>
           <tbody>
@@ -49,6 +50,9 @@
                 </td>
                 <td class="py-2 px-4 text-sm text-gray-700">
                   <%= link_to 'Voir les rapports', reports_admin_user_path(user), class: "text-blue-500 hover:underline" %>
+                </td>
+                <td class="py-2 px-4 text-sm text-gray-700">
+                  <%= link_to 'Voir les performances', admin_user_path(user), class: "text-blue-500 hover:underline" %>
                 </td>
               </tr>
             <% end %>

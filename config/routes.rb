@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   
 
   namespace :admin do 
-    resources :users, only: [:index, :new, :create] do
+    resources :users, only: [:index, :new, :create, :show] do
       member do
         get 'reports', to: 'users#user_reports'
       end

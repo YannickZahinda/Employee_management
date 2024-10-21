@@ -4,5 +4,6 @@ class Attendance < ApplicationRecord
 
     enum status: {absent: 0, present: 1}
 
+    validates :date, presence: true 
     validates :worked_hours, presence: true, numericality: { greater_than_or_equal_to: 0 }, if: :present?
 end

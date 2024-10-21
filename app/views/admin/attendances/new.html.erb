@@ -20,7 +20,13 @@
 
   <div class="mb-4">
     <%= form.label :date, class: "block text-sm font-medium text-gray-700" %>
-    <%= form.date_select :date, start_year: Date.current.year, end_year: Date.current.year + 1, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" %>
+    <%= form.datetime_select :date, 
+      start_year: Date.current.year, 
+      end_year: Date.current.year + 1, 
+      default: Time.current.in_time_zone('Africa/Harare'),
+      minute_step: 1,
+      time_zone: 'Africa/Harare',
+      class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" %>
   </div>
 
   <div class="mb-4">

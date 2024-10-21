@@ -11,6 +11,7 @@ class User::AttendancesController < ApplicationController
   
     def create
       @attendance = current_user.attendances.new(attendance_params)
+      @attendance.date = Time.current.in_time_zone('Africa/Harare')
       if @attendance.save
         redirect_to user_attendances_path, notice: 'Attendance was successfully recorded.'
       else
