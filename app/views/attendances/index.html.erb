@@ -58,7 +58,7 @@
                 <% end %>
               </div>
               <div class="mt-2 text-sm text-gray-600">
-                <strong>Date et Heure:</strong> <%= attend.created_at.strftime("%A, %d %B %Y, %H:%M") %>
+                <strong>Date et Heure:</strong> <%= attend.date.in_time_zone('Africa/Harare').strftime("%A, %d %B %Y, %H:%M") %>
               </div>
             </div>
           <% end %>
