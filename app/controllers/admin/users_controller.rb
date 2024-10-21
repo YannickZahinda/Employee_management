@@ -55,7 +55,8 @@ class Admin::UsersController < AdminController
           :admin, 
           :password, 
           :password_confirmation,
-          :qr_code
+          :qr_code,
+          :avatar
         )
     end
       

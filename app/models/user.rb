@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :sick_leaves, class_name: 'SickLeave'
   has_one_attached :qr_code
   has_one_attached :id_card
+  has_one_attached :avatar
 
   def total_worked_hours 
     attendances.where(status: :present).sum(:worked_hours)
