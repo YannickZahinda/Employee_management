@@ -12,7 +12,10 @@
 
         <div class="mb-4">
           <%= f.label :content, class: "block text-gray-700 font-semibold mb-2" %>
-          <%= f.text_area :content, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" %>
+          <%= f.text_area :content, 
+              rows: 10,  # Increases the number of visible lines
+              class: "mt-1 block w-full h-64 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 resize-y" 
+          %>
         </div>
 
         <div class="mt-6">

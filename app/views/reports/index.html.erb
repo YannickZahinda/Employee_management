@@ -12,7 +12,7 @@
           <% @reports.each do |report| %>
             <li class="py-4">
               <div class="font-bold text-gray-700">
-                Créé par employé: <span class="text-blue-600"><%= report.user.email %></span>
+                Votre rapport: <span class="text-blue-600"><%= report.user.name %></span>
               </div>
               <div class="text-gray-600">
                 <span class="font-semibold"><%= report.title %></span> - <span><%= report.created_at.to_date %></span>
@@ -21,7 +21,7 @@
             </li>
           <% end %>
         <% else %>
-          <li class="py-4 text-gray-600 text-center">Pas de rapport reçu des employés pour le moment.</li>
+          <li class="py-4 text-gray-600 text-center">Aucun rapport rédigé pour le moment.</li>
         <% end %>
       </ul>
     </div>

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
         get 'reports', to: 'users#user_reports'
       end
     end
-    resources :sick_leaves, only: [:index] do
+    resources :sick_leaves, only: [:index, :update] do
       member do
         patch :approve
         patch :reject
