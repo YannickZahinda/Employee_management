@@ -21,7 +21,7 @@ class ReportsController < ApplicationController
     private 
 
     def reports_params
-        params.require(:report).permit(:title, :content)
+        params.require(:report).permit(:title, :content, :report_type, attachments: [])
     end
 
     def authorize_user 
