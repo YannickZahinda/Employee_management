@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_08_120109) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_22_065655) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,8 +46,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_08_120109) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.date "date"
+    t.datetime "date"
     t.integer "status"
+    t.decimal "worked_hours"
   end
 
   create_table "holy_days", force: :cascade do |t|
@@ -80,6 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_08_120109) do
     t.string "title"
     t.text "content"
     t.integer "user_id"
+    t.string "report_type"
   end
 
   create_table "sick_leaves", force: :cascade do |t|
@@ -108,6 +110,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_08_120109) do
     t.date "date_of_joining"
     t.string "id_card"
     t.string "qr_code"
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

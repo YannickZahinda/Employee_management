@@ -13,14 +13,19 @@
             <tr>
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">ID</th>
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Employé</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Poste</th>
               <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Status</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Date</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Heures travaillées</th>
+              <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Totales heures</th>
             </tr>
           </thead>
           <tbody>
             <% @attendances.each do |attend| %>
               <tr class="border-b">
                 <td class="py-2 px-4 text-sm text-gray-700"><%= attend.id %></td>
-                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.email %></td>
+                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.name %></td>
+                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.position %></td>
                 <td class="py-2 px-4 text-sm text-gray-700">
                   <% if attend.status == "absent" %>
                     <span class="text-red-500 font-bold">Absent</span>
@@ -28,6 +33,17 @@
                     <span class="text-green-500 font-bold">Présent</span>
                   <% end %>
                 </td>
+                <td class="py-2 px-4 text-sm text-gray-700">
+                  <%= attend.date.in_time_zone('Africa/Harare').strftime("%B %d at %I:%M %p") %>
+                </td>
+                <td class="py-2 px-4 text-sm text-gray-700">
+                  <% if attend.worked_hours.present? %>
+                    <%= attend.worked_hours %> heures
+                  <% else %>
+                    Pas enregistrée
+                  <% end %>
+                </td>
+                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.total_worked_hours %></td>
               </tr>
             <% end %>
           </tbody>

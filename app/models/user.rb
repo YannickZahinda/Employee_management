@@ -14,36 +14,38 @@ class User < ApplicationRecord
   has_many :sick_leaves, class_name: 'SickLeave'
   has_one_attached :qr_code
   has_one_attached :id_card
+  has_one_attached :avatar
 
-  # before_commit :generate_qrcode, on: :create
+  def total_worked_hours 
+    attendances.where(status: :present).sum(:worked_hours)
+  end
 
-  # private 
+  def calculate_performance_metrics(start_date = 30.days.ago, end_date = Date.today)
+    start_date = start_date.to_date
+    end_date = end_date.to_date
+    
+    relevant_attendances = attendances.where(date: start_date..end_date)
 
-  # def generate_qrcode
-  #   # Get the host 
-  #   host = Rails.application.routes.default_url_options[:host] || 'localhost:3000'    # Create the qrcode object 
-  #   qr_code = RQRCode::QRCode.new(user_url(self, host: host))
-  #   # create the PNG object 
-  #   png = qrcode.as_png(
-  #     bit_depth: 1,
-  #     border_modules: 4,
-  #     color_mode: ChunkyPNG::COLOR_GRAYSCALE,
-  #     color: "black",
-  #     file: nil,
-  #     fill: "white",
-  #     module_px_size: 6,
-  #     resize_exactly_to: false,
-  #     resize_gte_to: false,
-  #     size: 120
-  #   )
-  #   self.qr_code.attach(
-  #     io.StringIO.new(png.to_s),
-  #     filename: 'qr_code.png',
-  #     content_type: "image/png"
-  #   )
-  # end
+    total_days = (end_date - start_date).to_i
+    days_present = relevant_attendances.where(status: :present).count
+    total_hours_worked = relevant_attendances.sum(:worked_hours) #a verifier ! ! ! !
 
+    attendance_rate = (days_present.to_f / total_days) * 100 
+    average_daily_hours = total_hours_worked / days_present if days_present > 0
 
+    {
+      total_days: total_days,
+      days_present: days_present,
+      total_hours_worked: total_hours_worked,
+      attendance_rate: attendance_rate, 
+      average_daily_hours: average_daily_hours
+    }
+
+  end
+
+  def performance_analysis
+    PerformanceAnalyzerService.new(self).analyze 
+  end
 
 
   # validates :name, presence: true

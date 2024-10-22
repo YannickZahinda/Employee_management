@@ -21,12 +21,12 @@ Rails.application.routes.draw do
   
 
   namespace :admin do 
-    resources :users, only: [:index, :new, :create] do
+    resources :users, only: [:index, :new, :create, :show] do
       member do
         get 'reports', to: 'users#user_reports'
       end
     end
-    resources :sick_leaves, only: [:index] do
+    resources :sick_leaves, only: [:index, :update] do
       member do
         patch :approve
         patch :reject
@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     resources :reports, only: [:index]
     resources :home, only: [:index]
   end
+
+  resources :users, only: [:index]
 
   namespace :user do 
     resources :attendances, only: [:index, :new, :create]

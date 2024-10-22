@@ -6,6 +6,10 @@ class Admin::UsersController < AdminController
 
     def index
         @users = User.where(admin: false)
+        @performance_analyses = {}
+        @users.each do |user|
+            @performance_analyses[user.id] = user.performance_analysis
+        end
     end
 
     def user_reports
@@ -15,6 +19,10 @@ class Admin::UsersController < AdminController
 
     def new 
         @user = User.new 
+    end
+
+    def show 
+        @user = User.find(params[:id])
     end
 
     def create
@@ -47,7 +55,8 @@ class Admin::UsersController < AdminController
           :admin, 
           :password, 
           :password_confirmation,
-          :qr_code
+          :qr_code,
+          :avatar
         )
     end
       
@@ -58,15 +67,14 @@ class Admin::UsersController < AdminController
     end
 
     def generate_qrcode(user)
-        # Get the host
+        
         host = Rails.application.routes.default_url_options[:host] || 'localhost:3000'
     
         url = user_attendances_url(host: host)
-        # Create the QR code object using user_url
-        # qr_code = RQRCode::QRCode.new(user_attendances_url(user, host: host))
+       
         qr_code = RQRCode::QRCode.new(url)
 
-        # Create the PNG object
+        
         png = qr_code.as_png(
           bit_depth: 1,
           border_modules: 4,
@@ -76,9 +84,6 @@ class Admin::UsersController < AdminController
           module_px_size: 6,
           size: 120
         )
-    
-        # Attach the PNG to the user model
-        # user.qr_code.attach(io: StringIO.new(png.to_s), filename: 'qrcode.png', content_type: 'image/png')
         user.qr_code.attach(io: StringIO.new(png.to_s), filename: "#{user.id}_qrcode.png", content_type: 'image/png')
     end
 

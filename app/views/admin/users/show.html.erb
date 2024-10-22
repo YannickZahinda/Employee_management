@@ -1,0 +1,36 @@
+<h1 class="text-2xl font-bold mb-6">Détails Utilisateur</h1>
+
+<div class="bg-white shadow-md rounded-lg p-6 max-w-sm mx-auto">
+  <!-- Avatar with conditional rendering -->
+  <div class="flex justify-center mb-4">
+  <%= image_tag @user.avatar.attached? ? url_for(@user.avatar) : 'default-avatar.jpg', style: "width: 264px; height: 264px;", class: "rounded-full shadow-lg" %>
+
+  </div>
+
+  <!-- User Info -->
+  <div class="text-center">
+    <p class="text-lg font-semibold mb-2">Nom: <%= @user.name %></p>
+    <p class="text-sm text-gray-500 mb-2">Poste: <%= @user.position %></p>
+    <p class="text-sm text-gray-500 mb-2">Date d'adhésion: <%= @user.date_of_joining %></p>
+    <p class="text-sm text-gray-500 mb-4">Heures travaillées: <%= @user.total_worked_hours %></p>
+  </div>
+
+  <div class="text-center">
+   
+    <% if @user.id_card.attached? %>
+       <span>Document : </span><%= link_to 'Télécharger le document', rails_blob_path(@user.id_card, disposition: "attachment"), class: "text-blue-500 hover:underline" %>
+    <% else %>
+       <span>Document : </span>Non fournie
+    <% end %>
+  </div>
+  <div class="text-left"><%= link_to 'Précédent', admin_users_path, class: "text-blue-500 hover:underline" %></div>
+
+  <!-- QR Code with conditional rendering -->
+  <div class="flex justify-center mt-4">
+    <% if @user.qr_code.present? %>
+      <%= image_tag(url_for(@user.qr_code), class: "w-24 h-24 object-contain border border-gray-300 p-2 rounded-md") %>
+    <% else %>
+      <p class="text-sm text-gray-400">Pas de QR Code</p>
+    <% end %>
+  </div>
+</div>
