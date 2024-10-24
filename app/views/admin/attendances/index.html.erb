@@ -24,8 +24,12 @@
             <% @attendances.each do |attend| %>
               <tr class="border-b">
                 <td class="py-2 px-4 text-sm text-gray-700"><%= attend.id %></td>
-                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.name%></td>
-                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.position%></td>
+                <td class="py-2 px-4 text-sm text-gray-700">
+                  <% if attend.user.present? %> <%= attend.user.name%> <% else %> undefined /Utilsateur inéxistant <% end %>
+                </td>
+                <td class="py-2 px-4 text-sm text-gray-700">
+                <% if attend.user.present? %> <%= attend.user.position%> <% else %> undefined <% end %>
+                </td>
                 <td class="py-2 px-4 text-sm text-gray-700">
                   <% if attend.status == "absent" %>
                     <span class="text-red-500 font-bold">Absent</span>
@@ -43,7 +47,9 @@
                     Pas enregistrée
                   <% end %>
                 </td>
-                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.total_worked_hours %></td>
+                <td class="py-2 px-4 text-sm text-gray-700">
+                <% if attend.user.present? %> <%= attend.user.total_worked_hours%> <% else %> undefined <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>
