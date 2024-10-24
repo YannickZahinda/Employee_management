@@ -24,8 +24,8 @@
             <% @attendances.each do |attend| %>
               <tr class="border-b">
                 <td class="py-2 px-4 text-sm text-gray-700"><%= attend.id %></td>
-                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.name %></td>
-                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.position %></td>
+                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.name%></td>
+                <td class="py-2 px-4 text-sm text-gray-700"><%= attend.user.position%></td>
                 <td class="py-2 px-4 text-sm text-gray-700">
                   <% if attend.status == "absent" %>
                     <span class="text-red-500 font-bold">Absent</span>

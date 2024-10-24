@@ -5,7 +5,7 @@ class User < ApplicationRecord
   include Rails.application.routes.url_helpers 
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :trackable
 
   has_many :reports
   has_many :meetings
@@ -15,6 +15,10 @@ class User < ApplicationRecord
   has_one_attached :qr_code
   has_one_attached :id_card
   has_one_attached :avatar
+
+  after_validation :geocode_last_sign_in_ip, if: -> (obj) {obj.saved_change_to_current_sign_in_ip? || obj.saved_change_to_last_sign_in_ip?}
+
+  geocoded_by :last_sign_in_ip
 
   def total_worked_hours 
     attendances.where(status: :present).sum(:worked_hours)
@@ -47,6 +51,56 @@ class User < ApplicationRecord
     PerformanceAnalyzerService.new(self).analyze 
   end
 
+
+  # private 
+
+  def geocode_last_sign_in_ip!
+    # return if geocode_last_sign_in_ip.blank?
+    ip = self.current_sign_in_ip || self.last_sign_in_ip
+
+     Rails.logger.debug "Started Geocoding for IP $$$$$$$$$$$$$$$: #{ip}"
+
+    return if ip.blank? || ip == "::1" || ip == "127.0.0.1"
+
+    begin 
+
+      result = Geocoder.search(ip)
+
+       Rails.logger.debug "Geocoder RESULT $$$$$$$$$$$$$$$: #{result.inspect}"
+
+       location = result.first 
+
+      if location 
+         Rails.logger.debug "FOUND LOCATION:::: $$$$$$$$$$$$$$$: #{location.inspect}"
+
+         location_string = [
+          location.city,
+          location.state,
+          location.country
+        ].compact.reject(&:empty?).join(', ')
+        
+        updates = {
+          last_known_location: location_string,
+          latitude: location.latitude,
+          longitude: location.longitude
+        }
+
+        # self.last_known_location = [location.city, location.country].compact.join(', ')
+        # self.latitude = location.latitude
+        # self.longitude = location.longitude
+
+        Rails.logger.debug "Updating with: $$$$$$$$$$$$$$$    #{updates.inspect}"
+        update(updates)
+
+      else
+        Rails.logger.warn "No location found for IP $$$$$$$$$$$: #{ip}"
+      end 
+
+
+    rescue => e
+      Rails.logger.error "Geocoding error: #{e.message}"
+    end
+  end
 
   # validates :name, presence: true
   # validates :position, presence: true

@@ -1,6 +1,5 @@
 class Admin::UsersController < AdminController
     require 'rqrcode'
-
     before_action :authenticate_user!
     before_action :require_admin
 
@@ -56,7 +55,8 @@ class Admin::UsersController < AdminController
           :password, 
           :password_confirmation,
           :qr_code,
-          :avatar
+          :avatar,
+          :last_known_location
         )
     end
       
@@ -86,5 +86,4 @@ class Admin::UsersController < AdminController
         )
         user.qr_code.attach(io: StringIO.new(png.to_s), filename: "#{user.id}_qrcode.png", content_type: 'image/png')
     end
-
 end
