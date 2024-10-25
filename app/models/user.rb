@@ -16,9 +16,9 @@ class User < ApplicationRecord
   has_one_attached :id_card
   has_one_attached :avatar
 
-  after_validation :geocode_last_sign_in_ip, if: -> (obj) {obj.saved_change_to_current_sign_in_ip? || obj.saved_change_to_last_sign_in_ip?}
+  # after_validation :geocode_last_sign_in_ip, if: -> (obj) {obj.saved_change_to_current_sign_in_ip? || obj.saved_change_to_last_sign_in_ip?}
 
-  geocoded_by :last_sign_in_ip
+  geocoded_by :last_sign_in_ip!
 
   def total_worked_hours 
     attendances.where(status: :present).sum(:worked_hours)

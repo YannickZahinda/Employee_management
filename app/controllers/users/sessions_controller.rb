@@ -7,13 +7,13 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def create 
-    # super do |resource|
-    #   resource.update(last_sign_in_ip: request.remote_ip)
-    #   resource.geocode_last_sign_in_ip
-    # end
 
     super do |resource|
-      real_ip = request.env['HTTP_X_FORWARDED_FOR'] || request.env['HTTP_X_REAL_IP'] || request.remote_ip
+      real_ip = if Rails.env.development?
+                  "102.68.153.3"
+      else
+        request.env['HTTP_X_FORWARDED_FOR'] || request.env['HTTP_X_REAL_IP'] || request.remote_ip
+      end 
 
       Rails.logger.debug "Detected IP $$$$$$$$$$$$$$$$: #{real_ip}"
 
