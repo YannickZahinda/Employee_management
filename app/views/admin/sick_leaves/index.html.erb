@@ -18,7 +18,7 @@
           <% @sick_leaves.each do |leave| %>
             <tr class="hover:bg-gray-50 transition duration-200 <%= 'bg-green-100 border border-green-300' if leave.status == 'approved' %> <%= 'bg-red-100 border border-red-300' if leave.status == 'rejected' %>">
               <td class="px-6 py-4 whitespace-nowrap text-md text-gray-700">
-                <%= leave.user.name %>
+                <% if leave.user? %><%= leave.user.name %><% else %> Utilisateur inexistant ou indefini <% end %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-md text-gray-700">
                 <%= leave.start_date.strftime("%B %d, %Y") %>
