@@ -3,7 +3,7 @@
 <div class="bg-white shadow-md rounded-lg p-6 max-w-sm mx-auto">
   <!-- Avatar with conditional rendering -->
   <div class="flex justify-center mb-4">
-  <%= image_tag @user.avatar.attached? ? url_for(@user.avatar) : 'default-avatar.jpg', style: "width: 264px; height: 264px;", class: "rounded-full shadow-lg" %>
+  <%= image_tag @user.avatar.attached? ? url_for(@user.avatar) : 'default-avatar.jpg', style: "width: 264px; height: 264px;", class: "rounded-full shadow-lg avatar" %>
 
   </div>
 
@@ -14,6 +14,9 @@
     <p class="text-sm text-gray-500 mb-2">Date d'adhésion: <%= @user.date_of_joining %></p>
     <p class="text-sm text-gray-500 mb-4">Heures travaillées: <%= @user.total_worked_hours %></p>
   </div>
+
+  <p>Last Known Location: <%= @user.last_known_location || 'Location not available' %></p>
+
 
   <div class="text-center">
    
