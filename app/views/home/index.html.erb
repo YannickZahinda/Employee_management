@@ -3,6 +3,8 @@
   
   <div class="mt-4">
     <p class="text-gray-700">Bienvenue sur la plateforme de gérance employés</p>
+    <%= image_tag current_user.avatar.attached? ? url_for(current_user.avatar) : 'default-avatar.jpg', class: "w-30 h-30 rounded-full mb-1 avatar" %>
+    <%= current_user.last_known_location %>
   </div>
 
   <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
