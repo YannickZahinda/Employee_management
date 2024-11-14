@@ -16,9 +16,33 @@ class User < ApplicationRecord
   has_one_attached :id_card
   has_one_attached :avatar
 
-  # after_validation :geocode_last_sign_in_ip, if: -> (obj) {obj.saved_change_to_current_sign_in_ip? || obj.saved_change_to_last_sign_in_ip?}
+  # geocoded_by :last_sign_in_ip!
 
-  geocoded_by :last_sign_in_ip!
+  validates :name, presence: true
+  validates :position, presence: true
+  validates :date_of_birth, presence: true
+  validates :sex, presence: true
+  validates :date_of_joining, presence: true
+  # validate :id_card_format
+
+  geocoded_by :current_sign_in_ip do |obj, results|
+    if geo = results.first 
+      obj.latitude = geo.latitude 
+      obj.longitude = geo.longitude
+      obj.last_known_location = [
+        geo.city,
+        geo.state,
+        geo.country
+      ].compact.reject(&:empty?).join(', ')
+    end
+  end
+
+  after_validation :geocode_last_sign_in_ip, if: -> (obj) {obj.saved_change_to_current_sign_in_ip? || obj.saved_change_to_last_sign_in_ip?}
+
+  # after_validation :geocode_user_location, if: :should_geocode?
+
+
+
 
   def total_worked_hours 
     attendances.where(status: :present).sum(:worked_hours)
@@ -54,7 +78,7 @@ class User < ApplicationRecord
 
   # private 
 
-  def geocode_last_sign_in_ip!
+  def geocode_last_sign_in_ip
     # return if geocode_last_sign_in_ip.blank?
     ip = self.current_sign_in_ip || self.last_sign_in_ip
 
@@ -102,12 +126,7 @@ class User < ApplicationRecord
     end
   end
 
-  # validates :name, presence: true
-  # validates :position, presence: true
-  # validates :date_of_birth, presence: true
-  # validates :sex, presence: true
-  # validates :date_of_joining, presence: true
-  # validate :id_card_format
+
 
   # enum role: { user: 0, admin: 1}
 
