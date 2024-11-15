@@ -19,7 +19,7 @@ class Users::SessionsController < Devise::SessionsController
       Rails.logger.debug "Detected IP $$$$$$$$$$$$$$$$: #{real_ip}"
 
       resource.update(last_sign_in_ip: real_ip, current_sign_in_ip: real_ip)
-      resource.geocode_last_sign_in_ip
+      # resource.geocode_last_sign_in_ip
     end
 
 

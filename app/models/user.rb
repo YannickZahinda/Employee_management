@@ -37,7 +37,7 @@ class User < ApplicationRecord
     end
   end
 
-  after_validation :geocode_last_sign_in_ip, if: -> (obj) {obj.saved_change_to_current_sign_in_ip? || obj.saved_change_to_last_sign_in_ip?}
+  # after_validation :geocode_last_sign_in_ip, if: -> (obj) {obj.saved_change_to_current_sign_in_ip? || obj.saved_change_to_last_sign_in_ip?}
 
   # after_validation :geocode_user_location, if: :should_geocode?
 
@@ -78,53 +78,53 @@ class User < ApplicationRecord
 
   # private 
 
-  def geocode_last_sign_in_ip
-    # return if geocode_last_sign_in_ip.blank?
-    ip = self.current_sign_in_ip || self.last_sign_in_ip
+  # def geocode_last_sign_in_ip
+  #   # return if geocode_last_sign_in_ip.blank?
+  #   ip = self.current_sign_in_ip || self.last_sign_in_ip
 
-     Rails.logger.debug "Started Geocoding for IP $$$$$$$$$$$$$$$: #{ip}"
+  #    Rails.logger.debug "Started Geocoding for IP $$$$$$$$$$$$$$$: #{ip}"
 
-    return if ip.blank? || ip == "::1" || ip == "127.0.0.1"
+  #   return if ip.blank? || ip == "::1" || ip == "127.0.0.1"
 
-    begin 
+  #   begin 
 
-      result = Geocoder.search(ip)
+  #     result = Geocoder.search(ip)
 
-       Rails.logger.debug "Geocoder RESULT $$$$$$$$$$$$$$$: #{result.inspect}"
+  #      Rails.logger.debug "Geocoder RESULT $$$$$$$$$$$$$$$: #{result.inspect}"
 
-       location = result.first 
+  #      location = result.first 
 
-      if location 
-         Rails.logger.debug "FOUND LOCATION:::: $$$$$$$$$$$$$$$: #{location.inspect}"
+  #     if location 
+  #        Rails.logger.debug "FOUND LOCATION:::: $$$$$$$$$$$$$$$: #{location.inspect}"
 
-         location_string = [
-          location.city,
-          location.state,
-          location.country
-        ].compact.reject(&:empty?).join(', ')
+  #        location_string = [
+  #         location.city,
+  #         location.state,
+  #         location.country
+  #       ].compact.reject(&:empty?).join(', ')
         
-        updates = {
-          last_known_location: location_string,
-          latitude: location.latitude,
-          longitude: location.longitude
-        }
+  #       updates = {
+  #         last_known_location: location_string,
+  #         latitude: location.latitude,
+  #         longitude: location.longitude
+  #       }
 
-        # self.last_known_location = [location.city, location.country].compact.join(', ')
-        # self.latitude = location.latitude
-        # self.longitude = location.longitude
+  #       # self.last_known_location = [location.city, location.country].compact.join(', ')
+  #       # self.latitude = location.latitude
+  #       # self.longitude = location.longitude
 
-        Rails.logger.debug "Updating with: $$$$$$$$$$$$$$$    #{updates.inspect}"
-        update(updates)
+  #       Rails.logger.debug "Updating with: $$$$$$$$$$$$$$$    #{updates.inspect}"
+  #       update(updates)
 
-      else
-        Rails.logger.warn "No location found for IP $$$$$$$$$$$: #{ip}"
-      end 
+  #     else
+  #       Rails.logger.warn "No location found for IP $$$$$$$$$$$: #{ip}"
+  #     end 
 
 
-    rescue => e
-      Rails.logger.error "Geocoding error: #{e.message}"
-    end
-  end
+  #   rescue => e
+  #     Rails.logger.error "Geocoding error: #{e.message}"
+  #   end
+  # end
 
 
 
