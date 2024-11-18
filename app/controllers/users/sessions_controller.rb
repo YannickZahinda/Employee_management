@@ -20,34 +20,18 @@ class Users::SessionsController < Devise::SessionsController
 
       resource.update(last_sign_in_ip: real_ip, current_sign_in_ip: real_ip)
       # resource.geocode_last_sign_in_ip
+
+      return render json: { redirect_path: after_sign_in_path_for(resource) } if request.format.json?
     end
 
 
   end
 
-  # def create
-  #   super do |resource|
-  #     real_ip = if Rails.env.production?
-  #                 # In production, try multiple headers
-  #                 request.env['HTTP_X_FORWARDED_FOR']&.split(',')&.first ||
-  #                 request.env['HTTP_X_REAL_IP'] ||
-  #                 request.remote_ip
-  #               else
-  #                 # In development, use a test IP or the actual remote IP
-  #                 ENV['TEST_IP'] || request.remote_ip
-  #               end
+  def after_sign_in_path_for(resource)
+    # Specify your dashboard path here
+    root_path # or whatever your dashboard route is named
+  end
 
-  #     Rails.logger.info "Detected IP ##################: #{real_ip}"
-      
-  #     # Clear any cached results for this IP
-  #     # Geocoder.cache.expire(real_ip) if Geocoder.cache
-      
-  #     resource.update(
-  #       current_sign_in_ip: real_ip,
-  #       last_sign_in_ip: resource.current_sign_in_ip
-  #     )
-  #   end
-  # end
 
   # POST /resource/sign_in
   # def create
