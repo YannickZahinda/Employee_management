@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   end
   resources :qr_codes, only: [:create, :show]
   post 'qr_codes/scan', to: 'qr_codes#scan'
+
+  post '/payroll/calculate', to: 'payroll#calculate'
   
 
   namespace :admin do 

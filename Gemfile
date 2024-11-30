@@ -34,6 +34,11 @@ gem 'geocoder'
 # Gemfile
 gem 'redis'
 
+gem 'faraday', '~> 2.12', '>= 2.12.1'
+
+gem 'config'
+
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 

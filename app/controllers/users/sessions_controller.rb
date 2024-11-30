@@ -7,6 +7,7 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def create 
+    Rails.logger.debug "SessionsController: Before Devise authentication"
 
     super do |resource|
       real_ip = if Rails.env.development?
@@ -21,8 +22,14 @@ class Users::SessionsController < Devise::SessionsController
       resource.update(last_sign_in_ip: real_ip, current_sign_in_ip: real_ip)
       # resource.geocode_last_sign_in_ip
 
-      return render json: { redirect_path: after_sign_in_path_for(resource) } if request.format.json?
+      Rails.logger.debug "SessionsController: Authentication successful for user #{resource.email}"
+      Rails.logger.debug "SessionsController: Session details: #{session.inspect}"
+      Rails.logger.debug "SessionsController: Warden details: #{warden.inspect}"
     end
+
+    Rails.logger.debug "SessionsController: After super call"
+
+    
 
 
   end

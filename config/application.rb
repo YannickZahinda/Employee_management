@@ -18,6 +18,7 @@ module EmployeeManagement
     #
     # config.time_zone = "Central Time (US & Canada)"
     config.time_zone = 'Africa/Harare'
+    config.settings = config_for(:settings)
     # config.eager_load_paths << Rails.root.join("extras")
     config.autoload_paths += %W(${config.root}/app/services)
   end
