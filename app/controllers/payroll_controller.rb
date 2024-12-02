@@ -31,7 +31,8 @@ class PayrollController < ApplicationController
     
 
         if response.success?
-            render json: response.body, status: :ok
+            parsed_body = JSON.parse(response.body)
+            render json: parsed_body, status: :ok
         else
             render json: {error: 'Failed to calculate the payroll'}, status: :unprocessable_entity
         end
