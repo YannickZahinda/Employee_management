@@ -38,6 +38,11 @@ gem 'faraday', '~> 2.12', '>= 2.12.1'
 
 gem 'config'
 
+gem 'pry-rails'
+
+gem 'prism'
+
+
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"

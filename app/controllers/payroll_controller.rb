@@ -11,10 +11,12 @@ class PayrollController < ApplicationController
             headers: {'Content-Type' => 'application/json'}
         )
 
-        response = conn.post('/payslip/calculate') do |req|
+        response = conn.post('/payroll/calculate') do |req|
             req.params['limit'] = 100
             req.body = {
-                employeeId: params[:user_id],
+                employeeId: params[:employeeId],
+                name: params[:name],
+                position: params[:position],
                 salary: params[:salary],
                 bonus: params[:bonus],
                 deductions: params[:deductions],
@@ -22,10 +24,16 @@ class PayrollController < ApplicationController
             }.to_json
         end
 
+        # binding.pry
+
+        puts " xxxxxxxxxxxxxxxxxxxxxxxxxx#{response.status}"
+
+    
+
         if response.success?
-            render json: response.parsed_response, status: :ok
+            render json: response.body, status: :ok
         else
-            render json: {error: 'Failed to calculate payroll'}, status: :unprocessable_entity
+            render json: {error: 'Failed to calculate the payroll'}, status: :unprocessable_entity
         end
     end
 
