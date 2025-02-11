@@ -1,24 +1,16 @@
-# README
+# Employee Management app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A application that manages employees inside of a given organization. The app controls the employee attendence records, meetings, sick-leaves, reports, geocodes user's
+location upon sign in, allowing attendance with QR code
 
-Things you may want to cover:
+# Start the app
 
-* Ruby version
+`` git clone https://github.com/YannickZahinda/Employee_management ``
 
-* System dependencies
+# install gems
 
-* Configuration
+`` bundle install``
 
-* Database creation
+# start the app
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+`` rails server``
